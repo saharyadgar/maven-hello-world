@@ -36,6 +36,10 @@
         <version>1.9.4</version>
     </dependency>
   </dependencies>
+	<scm>        
+    <connection>scm:svn:https://github.com/saharyadgar/maven-hello-world</connection>
+ <developerConnection>scm:svn:https://github.com/saharyadgar/maven-hello-world</developerConnection>
+    </scm>
   <build>
     <plugins>
       <plugin>
