@@ -32,6 +32,7 @@ jobs:
     - name: Build with Maven
       run: |
         cd my-app
+        mvn -B release:prepare release:perform
         mvn package --file pom.xml
         pwd
         ls target
