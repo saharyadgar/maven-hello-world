@@ -34,7 +34,7 @@ jobs:
         cd my-app
         mvn package --file pom.xml
         pwd
-        ls
+        ls target
     
     - name: Build & Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v5
