@@ -43,7 +43,7 @@ jobs:
         printenv
         export VERSION=$(cat my-app/pom.xml | grep version | head -1)
         echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin
-        docker image build -t saharyadgar/sahar_repo:${VERSION:11:5} .
-        docker push saharyadgar/sahar_repo:${VERSION:11:5}
+        docker image build -t saharyadgar/sahar_repo:${VERSION:11:6} .
+        docker push saharyadgar/sahar_repo:${VERSION:11:6}
 
       
