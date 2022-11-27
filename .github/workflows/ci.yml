@@ -42,9 +42,7 @@ jobs:
         export VERSION=$(cat my-app/pom.xml | grep version | head -1 | awk -F'[><]' '{print $3}')  # create env var to hold pom version
         echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin  # login to dockerhub
         docker image build -t saharyadgar/sahar_repo:${VERSION} .  # build image with pom version number
-
-
-#        docker push saharyadgar/sahar_repo:${VERSION:11:6}
+        docker push saharyadgar/sahar_repo:${VERSION}
     
     - name: Update version of pom.xml                        # add, commit and push new pom.xml version to repo
       uses: EndBug/add-and-commit@v9
