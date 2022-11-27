@@ -42,7 +42,7 @@ jobs:
       run: |
         export VERSION=$(awk 'FNR==6' my-app/pom.xml)
         echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin
-        docker image build -t saharyadgar/sahar_repo:$VERSION .
-        docker push saharyadgar/sahar_repo:$VERSION
+        docker image build -t $saharyadgar/sahar_repo:VERSION .
+        docker push $saharyadgar/sahar_repo:VERSION
 
       
