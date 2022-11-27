@@ -1,5 +1,5 @@
 FROM ubuntu:22.04 as base
-RUN useradd sahar && passwd -d sahar
+RUN useradd sahar && echo "sahar:test"|chpasswd
 
 FROM openjdk:8-jdk-alpine
 COPY --from=base /etc/passwd /etc/passwd
