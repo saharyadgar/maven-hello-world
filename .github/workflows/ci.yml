@@ -40,9 +40,10 @@ jobs:
     
     - name: Build and Push Image
       run: |
-        export VERSION=1.0.5-snapshot
+        printenv
+        export VERSION=$(cat my-app/pom.xml | grep version | head -1)
         echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin
-        docker image build -t saharyadgar/sahar_repo:$VERSION .
-        docker push saharyadgar/sahar_repo:$VERSION
+        docker image build -t saharyadgar/sahar_repo:${VERSION:11:5} .
+        docker push saharyadgar/sahar_repo:${VERSION:11:5}
 
       
