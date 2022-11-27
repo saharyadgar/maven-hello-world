@@ -50,6 +50,6 @@ jobs:
         author_name: saharyadgar
         author_email: saharyadgar12@gmail.com
         message: 'update the version of pom.xml'
-        add: '/my-app/pom.xml'
+        add: './my-app/pom.xml'
 
       
