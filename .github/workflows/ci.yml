@@ -43,7 +43,7 @@ jobs:
     
     - name: Build and Push Image
       run: |
-        export VERSION=$(awk 'FNR==6' pom.xml)
+        export VERSION=$(awk 'FNR==6' my-app/pom.xml)
         ls
         printenv
         echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin
