@@ -62,5 +62,5 @@ jobs:
       - name: Checkout the files
         run: |
           echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
-          chmod key.pem 400
+          chmod 400 key.pem
           ssh -i key.pem ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}
