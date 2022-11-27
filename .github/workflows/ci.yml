@@ -56,11 +56,11 @@ jobs:
     needs: build
   
     name: Deploy to EC2 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-18.04
 
     steps:
       - name: Checkout the files
         run: |
           echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
           chmod 400 key.pem
-          ssh -i key.pem ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}
+          ssh -i "key.pem" ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}
