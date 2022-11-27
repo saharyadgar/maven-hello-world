@@ -32,8 +32,8 @@ jobs:
     - name: Build with Maven
       run: |
         cd my-app
-        mvn versions:set -DremoveSnapshot                    # remove -snapshot from artifact
         mvn -B release:update-versions                       # increase pom version
+        mvn versions:set -DremoveSnapshot                    # remove -snapshot from artifact
         mvn package -f pom.xml                               # build jar artifact
       
     
