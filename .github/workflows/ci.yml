@@ -35,6 +35,7 @@ jobs:
         git config --global user.email "saharyadgar12@gmail.com"
         git config --global user.name "saharyadgar"
         mvn -B release:prepare
+        mvn versions:set -DremoveSnapshot
         mvn package --file pom.xml
       
     
