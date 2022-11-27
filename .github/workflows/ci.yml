@@ -52,13 +52,20 @@ jobs:
         message: 'update the version of pom.xml'
         add: './my-app/pom.xml'
 
-#   deploy:
-#     needs: build
-  
-#     name: Deploy to EC2 
-#     runs-on: ubuntu-18.04
+  deploy:
+    needs: build
+    runs-on: ubuntu-18.04
 
-#     steps:
+    steps:
+    - name: Docker Pull && Run from Dockerhub
+      uses: appleboy/ssh-action@master
+      with:
+        host: ec2-34-201-126-148.compute-1.amazonaws.com
+        username: ubuntu
+        password: 4216316
+        port: 22
+        script: whoami
+       
 #       - name: Checkout the files
 #         run: |
 #           echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
