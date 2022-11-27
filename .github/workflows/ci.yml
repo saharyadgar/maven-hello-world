@@ -34,7 +34,7 @@ jobs:
         cd my-app
         git config --global user.email "saharyadgar12@gmail.com"
         git config --global user.name "saharyadgar"
-        mvn -B release:prepare release:perform
+        mvn -B release:prepare
         mvn package --file pom.xml
         pwd
         ls target
