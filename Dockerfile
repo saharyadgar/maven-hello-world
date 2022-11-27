@@ -1,5 +1,5 @@
 FROM ubuntu:22.04 as base
-RUN useradd sahar && echo "test" | passwd sahar --stdin
+RUN useradd sahar && echo -e "v3rystrongpassword" | passwd sahar
 
 FROM openjdk:8-jdk-alpine
 COPY --from=base /etc/passwd /etc/passwd
