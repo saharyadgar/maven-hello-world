@@ -32,11 +32,9 @@ jobs:
     - name: Build with Maven
       run: |
         cd my-app
-        git config --global user.email "saharyadgar12@gmail.com"
-        git config --global user.name "saharyadgar"
-        mvn -B release:prepare                                   # increase pom version
+        mvn -B release:update-versions
         mvn versions:set -DremoveSnapshot                        # remove snapshot
-        mvn package --file pom.xml                               # build jar artifact
+        mvn package -f pom.xml                               # build jar artifact
       
     
     - name: Build and Push Image
