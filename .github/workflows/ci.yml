@@ -44,6 +44,7 @@ jobs:
     - name: Build and Push Image
       run: |
         export VERSION=$(awk 'FNR==6' pom.xml)
+        ls
         printenv
         echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin
         docker image build -t saharyadgar/sahar_repo:test1 .
