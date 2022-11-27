@@ -36,6 +36,7 @@ jobs:
         git config --global user.name "saharyadgar"
         mvn -B release:prepare
         mvn package --file pom.xml
+        export VERSION=$(awk 'FNR==6' pom.xml)
         pwd
         ls target
     
@@ -43,7 +44,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: saharyadgar/sahar_repo
-        tags: test
+        tags: ${VERSION}
         registry: docker.io
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
