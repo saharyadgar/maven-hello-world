@@ -41,7 +41,7 @@ jobs:
     - name: Build and Push Image
       run: |
         pwd
-        ls my-app
+        ls my-app/target
         export VERSION=$(cat my-app/pom.xml | grep version | head -1)
         echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin
         docker image build -t saharyadgar/sahar_repo:${VERSION:11:6} .
