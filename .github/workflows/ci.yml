@@ -36,7 +36,6 @@ jobs:
         git config --global user.name "saharyadgar"
         mvn -B release:prepare
         mvn package --file pom.xml
-        export VERSION=$(awk 'FNR==6' pom.xml)
         printenv
         pwd
         ls target
@@ -44,6 +43,7 @@ jobs:
     
     - name: Build and Push Image
       run: |
+        export VERSION=$(awk 'FNR==6' pom.xml)
         printenv
         echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin
         docker image build -t saharyadgar/sahar_repo:test1 .
