@@ -43,7 +43,7 @@ jobs:
     - name: Build and Push Image
       run: |
         echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin
-        docker image build -t saharyadgar/sahar_repo:$VERSION .
-        docker push saharyadgar/sahar_repo:$VERSION
+        docker image build -t saharyadgar/sahar_repo:test1 .
+        docker push saharyadgar/sahar_repo:test1
 
       
