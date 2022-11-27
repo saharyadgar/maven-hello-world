@@ -40,12 +40,10 @@ jobs:
         pwd
         ls target
     
-    - name: Build & Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: saharyadgar/sahar_repo
-        tags: ${{ VERSION }}
-        registry: docker.io
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+    - name: Build and Push Image
+      run: |
+        echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin
+        docker image build -t saharyadgar/sahar_repo:$VERSION .
+        docker push saharyadgar/sahar_repo:$VERSION
+
       
