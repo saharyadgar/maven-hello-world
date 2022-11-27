@@ -53,6 +53,7 @@ jobs:
         add: './my-app/pom.xml'
 
   deploy:
+    needs: build
   
     name: Deploy to EC2 
     runs-on: ubuntu-22.04
