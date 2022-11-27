@@ -44,7 +44,7 @@ jobs:
         docker image build -t saharyadgar/sahar_repo:${VERSION:11:6} .  # build image with pom version number
         docker push saharyadgar/sahar_repo:${VERSION:11:6}
     
-    - name: Update version of pom.xml
+    - name: Update version of pom.xml                        # add, commit and push new pom.xml version to repo
       uses: EndBug/add-and-commit@v9
       with:
         author_name: saharyadgar
