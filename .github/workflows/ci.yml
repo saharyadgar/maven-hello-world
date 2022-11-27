@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "development" ]
-  #pull_request:
-   # branches: [ "master" ]
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -65,8 +65,8 @@ jobs:
         password: ${{ secrets.EC2_PASSWORD }}
         port: 22
         script: |
-          mkdir proj && cd proj
-          git clone https://github.com/saharyadgar/maven-hello-world.git
+          cd proj
+          git pull https://github.com/saharyadgar/maven-hello-world.git
           export VERSION=$(cat maven-hello-world/my-app/pom.xml | grep version | head -1 | awk -F'[><]' '{print $3}')
           echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin
           docker run -d --name test saharyadgar/sahar_repo:${VERSION}
