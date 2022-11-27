@@ -6,4 +6,5 @@ COPY --from=base /etc/passwd /etc/passwd
 USER sahar
 WORKDIR /proj
 COPY ./my-app/target/my-app* /proj/
-CMD java -jar my-app*
+CMD sleep 500
+#CMD java -jar my-app*
