@@ -37,6 +37,7 @@ jobs:
         mvn -B release:prepare
         mvn package --file pom.xml
         export VERSION=$(awk 'FNR==6' pom.xml)
+        printenv
         pwd
         ls target
       
