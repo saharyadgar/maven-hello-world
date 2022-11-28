@@ -1,0 +1,67 @@
+name: Java CI/CD with Maven
+
+on:
+  push:
+    branches: [ "development" ]                      # workflow triggered by push to dev branch
+
+env: 
+  DOCKERHUB_REPO: saharyadgar/sahar_repo             # env var to hold dockerhub repo
+
+jobs:
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3                      # checkout github repo so workflow can access it
+    
+    - name: Set up JDK 8                             # set up jdk 8 to run maven
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+        cache: maven
+    
+    - name: Build with Maven
+      run: |
+        cd my-app
+        mvn -B release:update-versions                       # increase pom version
+        mvn versions:set -DremoveSnapshot                    # remove -snapshot from artifact
+        mvn package -f pom.xml                               # build jar artifact from pom
+      
+    
+    - name: Build and Push Image
+      run: |
+        export VERSION=$(cat my-app/pom.xml | grep version | head -1 | awk -F'[><]' '{print $3}')    # create env var to hold pom version
+        echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin   # login to dockerhub
+        docker image build -t ${DOCKERHUB_REPO}:${VERSION} .                                    # build image with pom version number
+        docker push ${DOCKERHUB_REPO}:${VERSION}
+    
+    - name: Update version of pom.xml                        # add, commit and push new pom.xml version to repo
+      uses: EndBug/add-and-commit@v9
+      with:
+        author_name: saharyadgar
+        author_email: saharyadgar12@gmail.com
+        message: 'update the version of pom.xml'
+        add: './my-app/pom.xml'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Docker Pull && Run from Dockerhub                # pull docker image from dockerhub repo and run container with the latest version    
+      uses: appleboy/ssh-action@master
+      with:
+        host: ec2-54-173-116-226.compute-1.amazonaws.com
+        username: ${{ secrets.EC2_USER }}
+        password: ${{ secrets.EC2_PASSWORD }}
+        port: 22 
+        script: |
+          cd proj/maven-hello-world
+          git pull                                                                                      # pull latest pom from github repo
+          export VERSION=$(cat my-app/pom.xml | grep version | head -1 | awk -F'[><]' '{print $3}')     # create env var to hold pom version
+          echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "saharyadgar" --password-stdin    # login to dockerhub
+          docker run -d --name test-${VERSION} ${DOCKERHUB_REPO}:${VERSION}                             # run container from docker image
+       
+
