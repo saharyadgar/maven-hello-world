@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Checkout
     - uses: actions/checkout@v3                      # checkout github repo so workflow can access it
     
     - name: Set up JDK 8                             # set up jdk 8 to run maven
