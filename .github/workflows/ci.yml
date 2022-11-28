@@ -60,7 +60,7 @@ jobs:
     - name: Docker Pull && Run from Dockerhub
       uses: appleboy/ssh-action@master
       with:
-        host: ec2-34-201-126-148.compute-1.amazonaws.com
+        host: ec2-54-173-116-226.compute-1.amazonaws.com
         username: ${{ secrets.EC2_USER }}
         password: ${{ secrets.EC2_PASSWORD }}
         port: 22
