@@ -52,11 +52,14 @@ jobs:
     steps:
     - name: Docker Pull && Run from Dockerhub                # pull docker image from dockerhub repo and run container with the latest version    
       uses: appleboy/ssh-action@master
+      env: 
+        DOCKERHUB_REPO: saharyadgar/sahar_repo 
       with:
         host: ec2-54-173-116-226.compute-1.amazonaws.com
         username: ${{ secrets.EC2_USER }}
         password: ${{ secrets.EC2_PASSWORD }}
-        port: 22 
+        port: 22
+        envs: DOCKERHUB_REPO
         script: |
           cd proj/maven-hello-world
           git pull                                                                                      # pull latest pom from github repo
