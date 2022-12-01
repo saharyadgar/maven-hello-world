@@ -55,7 +55,7 @@ jobs:
       env: 
         DOCKERHUB_REPO: saharyadgar/sahar_repo 
       with:
-        host: ec2-35-173-124-210.compute-1.amazonaws.com
+        host: ec2-3-89-196-102.compute-1.amazonaws.com
         username: ${{ secrets.EC2_USER }}
         password: ${{ secrets.EC2_PASSWORD }}
         port: 22
